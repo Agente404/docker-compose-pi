@@ -1,0 +1,39 @@
+version: "2.1"
+services:
+  pydio:
+    image: linuxserver/pydio
+    container_name: pydio_app
+    networks:
+      - pydio
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+    volumes:
+      - ./pydio:/config
+      - /directorio/de/datos:/data
+    ports:
+      - 4043:443
+    restart: unless-stopped
+    
+  db:
+    image: yobasystems/alpine-mariadb:arm32v7
+    container_name: pydio_db
+    restart: always
+    networks:
+      - pydio
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=pydio
+      - MYSQL_USER=pydio
+      - MYSQL_PASSWORD=password
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+networks:
+  pydio:
+    name: pydio
+    driver: bridge
