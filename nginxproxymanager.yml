@@ -1,0 +1,42 @@
+version: "2.1"
+services:
+  app:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: npm_app
+    restart: always
+    networks:
+      - npm
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81'
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+      - DISABLE_IPV6=true
+    volumes:
+      - ./npm/config.json:/app/config/production.json
+      - ./npm/data:/data
+      - ./npm/letsencrypt:/etc/letsencrypt
+  db:
+    image: yobasystems/alpine-mariadb:arm32v7
+    container_name: npm_db
+    restart: always
+    networks:
+      - npm
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=npm
+      - MYSQL_USER=npm
+      - MYSQL_PASSWORD=password
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+networks:
+  npm:
+    name: npm
+    driver: bridge
