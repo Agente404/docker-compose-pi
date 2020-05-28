@@ -1,2 +1,9 @@
 # docker-compose-pi
-Docker compose files for Raspberry Pi / Raspbian
+Archivos de configuración docker compose para desplegar distintas aplicaciones en Raspberry Pi:
+
+* Heimdall
+* Pydio
+* Transmission
+* NginxProxyManager
+
+Mas información en el [blog](https://agente404.com/?p=2361)
