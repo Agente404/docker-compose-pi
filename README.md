@@ -5,5 +5,6 @@ Archivos de configuración docker compose para desplegar distintas aplicaciones 
 * Pydio
 * Transmission
 * NginxProxyManager
+* JDownloader
 
 Mas información en el [blog](https://agente404.com/?p=2361)
