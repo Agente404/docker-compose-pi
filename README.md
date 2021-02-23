@@ -6,5 +6,6 @@ Archivos de configuración docker compose para desplegar distintas aplicaciones 
 * Transmission
 * NginxProxyManager
 * JDownloader
+* Wallabag
 
 Mas información en el [blog](https://agente404.com/?p=2361)
