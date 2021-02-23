@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+   jdownloader:
+    image: jaymoulin/jdownloader
+    container_name: jdownloader
+    restart: always
+    user: 998:100
+    volumes:
+        - ./config/jdownloader:/opt/JDownloader/cfg
+        - ./downloads:/opt/JDownloader/Downloads
+    environment: 
+            MYJD_USER: user_email
+            MYJD_PASSWORD: user_password
+            MYJD_DEVICE_NAME: raspberry
+    ports:
+        - 3129:3129
