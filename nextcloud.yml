@@ -1,0 +1,40 @@
+version: "2.1"
+services:
+  app:
+    image: linuxserver/nextcloud
+    container_name: nextcloud_app
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+    volumes:
+      - ./nextcloud/config:/config
+      - ./nextcloud/data:/data
+    ports:
+      - 9443:443
+    networks:
+      - nextcloud
+    restart: unless-stopped
+  db:
+    image: linuxserver/mariadb
+    container_name: nextcloud_db
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=Europe/Madrid
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=password
+    volumes:
+      - ./mariadb:/config
+    ports:
+      - 3306:3306
+    networks:
+      - nextcloud
+    restart: unless-stopped
+    
+networks:
+  nextcloud:
+    name: nextcloud
+    driver: bridge
